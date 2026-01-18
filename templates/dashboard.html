@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard | Arya Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-blue-800 p-4 text-white flex justify-between items-center shadow-lg">
+        <h1 class="text-xl font-bold">Attendance Tracker</h1>
+        <div class="flex items-center gap-4">
+            <span>Welcome, {{ name }}</span>
+            <a href="/logout" class="bg-red-500 px-3 py-1 rounded text-sm">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-6">
+        <div class="bg-white p-6 rounded-lg shadow mb-8">
+            <h2 class="text-lg font-bold mb-4">Add New Subject</h2>
+            <form action="/add_subject" method="POST" class="flex gap-4">
+                <input type="text" name="sub_name" placeholder="Subject Name" class="border p-2 flex-grow rounded" required>
+                <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded font-bold hover:bg-green-700">Add</button>
+            </form>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for sub in subjects %}
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-600">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold">{{ sub.name }}</h3>
+                    {% set per = (sub.present_count / sub.total_classes * 100) if sub.total_classes > 0 else 0 %}
+                    <span class="text-lg font-bold {{ 'text-red-600' if per < 75 else 'text-green-600' }}">{{ per|round(1) }}%</span>
+                </div>
+
+                <div class="flex justify-around bg-gray-50 p-2 rounded mb-4 text-xs font-bold text-gray-500">
+                    <span>CLASS</span><span>LAB</span><span>EXTRA</span>
+                </div>
+
+                <div class="flex gap-2">
+                    <form action="/mark/{{ sub.id }}/present" method="POST" class="w-full">
+                        <button class="w-full bg-blue-600 text-white py-2 rounded font-bold hover:bg-blue-700">Present</button>
+                    </form>
+                    <form action="/mark/{{ sub.id }}/absent" method="POST" class="w-full">
+                        <button class="w-full border border-red-600 text-red-600 py-2 rounded font-bold hover:bg-red-50">Absent</button>
+                    </form>
+                </div>
+                
+                <p class="text-center text-xs mt-4 text-gray-400">Total: {{ sub.total_classes }} | Present: {{ sub.present_count }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

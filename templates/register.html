@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register | Attendance Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-auto max-w-md">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-blue-800">Create Account</h1>
+            <p class="text-gray-500">Join the Smart Attendance Tracker</p>
+        </div>
+
+        <form method="POST" class="space-y-4">
+            {{ form.hidden_tag() }}
+            
+            <div>
+                {{ form.name.label(class="block text-sm font-semibold text-gray-700") }}
+                {{ form.name(class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none", placeholder="Full Name") }}
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700">Class</label>
+                    <input type="text" name="class_name" class="w-full mt-1 p-2 border border-gray-300 rounded-md outline-none" placeholder="e.g. 3rd Sem">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700">Mobile</label>
+                    <input type="text" name="mobile" class="w-full mt-1 p-2 border border-gray-300 rounded-md outline-none" placeholder="9876543210">
+                </div>
+            </div>
+
+            <div>
+                {{ form.gmail.label(class="block text-sm font-semibold text-gray-700") }}
+                {{ form.gmail(class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none", placeholder="you@gmail.com") }}
+            </div>
+
+            <div>
+                {{ form.password.label(class="block text-sm font-semibold text-gray-700") }}
+                {{ form.password(class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none") }}
+            </div>
+
+            <div>
+                {{ form.confirm_password.label(class="block text-sm font-semibold text-gray-700") }}
+                {{ form.confirm_password(class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none") }}
+            </div>
+
+            {{ form.submit(class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-md transition duration-200 cursor-pointer") }}
+        </form>
+
+        <p class="mt-6 text-center text-sm text-gray-600">
+            Already have an account? <a href="{{ url_for('login') }}" class="text-blue-600 font-bold hover:underline">Login here</a>
+        </p>
+    </div>
+</body>
+</html>

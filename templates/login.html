@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login | Attendance Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-auto max-w-md">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-blue-800">Welcome Back</h1>
+            <p class="text-gray-500">Log in to track your attendance</p>
+        </div>
+
+        <form method="POST" class="space-y-6">
+            {{ form.hidden_tag() }}
+
+            <div>
+                {{ form.gmail.label(class="block text-sm font-semibold text-gray-700") }}
+                {{ form.gmail(class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none", placeholder="Enter your Gmail") }}
+            </div>
+
+            <div>
+                {{ form.password.label(class="block text-sm font-semibold text-gray-700") }}
+                {{ form.password(class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none", placeholder="••••••••") }}
+            </div>
+
+            <div class="flex items-center justify-between">
+                <label class="flex items-center text-sm text-gray-600">
+                    <input type="checkbox" class="mr-2 rounded"> Remember me
+                </label>
+                <a href="#" class="text-sm text-blue-600 hover:underline">Forgot Password?</a>
+            </div>
+
+            {{ form.submit(class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-md transition duration-200 cursor-pointer") }}
+        </form>
+
+        <p class="mt-8 text-center text-sm text-gray-600">
+            New here? <a href="{{ url_for('register') }}" class="text-blue-600 font-bold hover:underline">Create an account</a>
+        </p>
+    </div>
+</body>
+</html>
